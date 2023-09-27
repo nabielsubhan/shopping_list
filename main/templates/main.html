@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">{{ name }}</a>
+        <a href="{% url 'main:logout' %}">
+            <button class="btn btn-outline-secondary" type="submit">Logout</button>
+        </a>
+        
+        </div>
+    </nav>
+
     <h1>Shopping List Page</h1>
 
     <h5>Name:</h5>
@@ -25,6 +35,18 @@
                 <td>{{product.price}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.date_added}}</td>
+                <td>
+                    <a href="{% url 'main:edit_product' product.pk %}">
+                        <button type="button" class="btn btn-outline-primary">
+                            Edit
+                        </button>
+                    </a>
+                    <a href="{% url 'main:delete_product' product.pk %}">
+                        <button type="button" class="btn btn-outline-danger">
+                            Delete
+                        </button>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
@@ -32,17 +54,11 @@
     <br />
     
     <a href="{% url 'main:create_product' %}">
-        <button>
+        <button type="button" class="btn btn-outline-success">
             Add New Product
         </button>
     </a>
 
     <h5>Sesi terakhir login: {{ last_login }}</h5>
-
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
     
 {% endblock content %}
